@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apartment</title>
+  <script src="https://cdn.tailwindcss.com">// smooth parallax (works on mobile too)
+window.addEventListener('scroll', () => {
+  const hero = document.querySelector('.hero-bg');
+  const offset = window.scrollY;
+
+  // parallax strength adaptive
+  const isMobile = window.innerWidth <= 768;
+  const speed = isMobile ? 0.15 : 0.3;
+
+  hero.style.transform = `translateY(${offset * speed}px) scale(1.05)`;
+});
+  const offset = window.scrollY;
+  hero.style.transform = `translateY(${offset * 0.3}px) scale(1.05)`;
+});
+
+</script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1,h2 { font-family: 'Playfair Display', serif; }
+
+    /* fade in */
+    .fade-in { opacity: 0; transform: translateY(30px); transition: all 1.2s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* HERO subtle zoom */
+    .hero-bg {
+      background-size: cover;
+      background-position: center 65%;
+    }
+
+    @media (max-width: 768px) {
+      .hero-bg {
+        background-position: center 75%;
+      }
+    }
+    @keyframes zoomHero {
+      from { transform: scale(1); }
+      to { transform: scale(1.08); }
+    }
+
+    /* button glow */
+    .glow-btn { transition: all 0.3s ease; }
+    .glow-btn:hover {
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transform: translateY(-2px);
+    }
+
+    /* gallery hover */
+    .img-wrap { overflow: hidden; border-radius: 16px; }
+    .img-wrap img { transition: transform 0.6s ease; }
+    .img-wrap:hover img { transform: scale(1.07); }
+
+    /* cursor glow */
+    .cursor-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+      pointer-events: none;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.25) 0%, rgba(59,130,246,0.08) 40%, transparent 70%);
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      mix-blend-mode: multiply;
+      transition: transform 0.08s linear;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAV -->
+<div class="fixed top-0 w-full flex justify-end items-center px-6 py-4 z-50 bg-white/60 backdrop-blur">
+  <button onclick="setLang('en')" class="mx-2">EN</button>
+  <button onclick="setLang('ru')" class="mx-2">RU</button>
+</div>
+
+<!-- HERO -->
+<section class="relative h-[85vh] flex items-center justify-center text-center overflow-hidden">
+  <div class="absolute inset-0 bg-cover hero-bg" style="background-image:url('image.png'); background-position:center 65%;"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60"></div>
+  <div class="relative z-10 px-4 text-white fade-in">
+    <h1 id="title" class="text-4xl md:text-6xl mb-4">Apartment for rent in Nice</h1>
+    <p id="subtitle" class="text-lg md:text-xl opacity-90">30 m² • 5 minutes to the beach</p>
+  </div>
+</section>
+
+<!-- ADDRESS -->
+<section class="py-8 text-center text-gray-500 fade-in">
+  <p id="address">Rue Alexis Mossa, Nice</p>
+</section>
+
+<!-- ABOUT -->
+<section class="py-12 px-6 max-w-3xl mx-auto text-center fade-in">
+  <h2 id="aboutTitle" class="text-3xl mb-4">About the apartment</h2>
+  <p id="aboutText" class="text-gray-600 leading-relaxed">
+    Cozy and bright apartment, only 5 minutes walk to the sea. Perfect for a relaxed vacation stay.
+  </p>
+</section>
+
+<!-- FEATURES -->
+<section class="py-12 fade-in">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-4 gap-8 text-center">
+    <div><p class="text-2xl">30</p><p>m²</p></div>
+    <div><p class="text-2xl">1</p><p id="bedroom">Bedroom</p></div>
+    <div><p class="text-2xl">AC</p><p id="ac">Air conditioning</p></div>
+    <div><p class="text-2xl text-gray-600" id="quiet">Quiet courtyard</p></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="py-12 px-6 max-w-5xl mx-auto fade-in">
+  <h2 id="galleryTitle" class="text-3xl text-center mb-8">Apartment</h2>
+  <div class="grid md:grid-cols-2 gap-5">
+    <div class="img-wrap"><img src="photo1.jpg" class="shadow"></div>
+    <div class="img-wrap"><img src="photo2.jpg" class="shadow"></div>
+    <div class="img-wrap"><img src="photo3.jpg" class="shadow"></div>
+    <div class="img-wrap"><img src="photo4.jpg" class="shadow"></div>
+  </div>
+</section>
+
+<!-- VIDEO SMALL -->
+<section class="py-12 px-6 max-w-xl mx-auto text-center fade-in">
+  <h2 id="videoTitle" class="text-2xl mb-4">A short glimpse</h2>
+  <div class="aspect-video">
+    <video controls class="w-full h-full rounded-xl shadow">
+      <source src="video.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-16 text-center bg-gradient-to-r from-blue-600 to-blue-500 text-white fade-in">
+  <h2 id="ctaTitle" class="text-3xl mb-6">Contact us to book</h2>
+  <a href="https://wa.me/33753065745" target="_blank">
+    <button id="ctaBtn" class="bg-white text-blue-700 px-8 py-3 rounded-full glow-btn">Contact on WhatsApp</button>
+  </a>
+</section>
+
+<script>
+const content = {
+  en: {
+    title: "Apartment for rent in Nice",
+    subtitle: "30 m² • 5 minutes to the beach",
+    aboutTitle: "About the apartment",
+    aboutText: "Cozy and bright apartment, only 5 minutes walk to the sea. Perfect for a relaxed vacation stay.",
+    bedroom: "Bedroom",
+    ac: "Air conditioning",
+    quiet: "Quiet courtyard",
+    ctaTitle: "Contact us to book",
+    ctaBtn: "Contact",
+    galleryTitle: "Apartment",
+    videoTitle: "A short glimpse",
+    address: "Rue Alexis Mossa, Nice"
+  },
+  ru: {
+    title: "Квартира в аренду в Ницце",
+    subtitle: "30 м² • 5 минут до моря",
+    aboutTitle: "О квартире",
+    aboutText: "Уютная и светлая квартира, всего 5 минут пешком до моря. Идеально для отдыха.",
+    bedroom: "Спальня",
+    ac: "Кондиционер",
+    quiet: "Тихий двор",
+    ctaTitle: "Свяжитесь с нами для бронирования",
+    ctaBtn: "Связаться",
+    galleryTitle: "Квартира",
+    videoTitle: "Небольшое видео",
+    address: "Rue Alexis Mossa, Ницца"
+  }
+};
+
+function setLang(lang) {
+  for (let key in content[lang]) {
+    if(document.getElementById(key)){
+      document.getElementById(key).innerText = content[lang][key];
+    }
+  }
+}
+
+// fade in on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+});
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// cursor glow follow
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', (e) => {
+  glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+});
+</script>
+
+</body>
+</html>
