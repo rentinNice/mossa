@@ -99,7 +99,7 @@
 <section class="py-12 px-6 max-w-3xl mx-auto text-center fade-in">
   <h2 id="aboutTitle" class="text-3xl mb-4">About the apartment</h2>
   <p id="aboutText" class="text-gray-600 leading-relaxed">
-    Cozy and bright apartment, only 5 minutes walk to the sea. Perfect for a relaxed vacation stay.
+    Cozy and bright apartment in the city center, just 5 minutes walk to the sea. Surrounded by supermarkets, cafes, restaurants, and shops. Only a short walk to the tram stop with direct access to the train station (around 10 minutes). Perfect for a comfortable and relaxing stay in Nice.
   </p>
 </section>
 
@@ -109,7 +109,7 @@
     <div><p class="text-2xl">30</p><p>m²</p></div>
     <div><p class="text-2xl">1</p><p id="bedroom">Bedroom</p></div>
     <div><p class="text-2xl">AC</p><p id="ac">Air conditioning</p></div>
-    <div><p class="text-xl text-gray-600" id="quiet">Windows facing a quiet courtyard</p></div>
+    <div><p class="text-2xl text-gray-600" id="quiet"><span class="text-sm md:text-base tracking-wide">Quiet Courtyard View</span></p></div>
   </div>
 </section>
 
@@ -121,6 +121,25 @@
     <div class="img-wrap"><img src="photo2.jpg"></div>
     <div class="img-wrap"><img src="photo3.jpg"></div>
     <div class="img-wrap"><img src="photo4.jpg"></div>
+  </div>
+</section>
+
+<!-- WHY THIS APARTMENT -->
+<section class="py-16 px-6 max-w-5xl mx-auto text-center fade-in">
+  <h2 id="whyTitle" class="text-3xl mb-10">Why guests love this apartment</h2>
+  <div class="grid md:grid-cols-3 gap-8 text-left">
+    <div>
+      <h3 class="font-semibold text-lg mb-2">Perfect location</h3>
+      <p class="text-gray-600">Right in the center of Nice, with everything within walking distance — beach, shops, restaurants, and transport.</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-2">Quiet and relaxing</h3>
+      <p class="text-gray-600">Windows facing a peaceful courtyard ensure calm and restful atmosphere despite central location.</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg mb-2">Comfortable stay</h3>
+      <p class="text-gray-600">Fully equipped, bright, and cozy space designed for a pleasant vacation experience.</p>
+    </div>
   </div>
 </section>
 
@@ -148,13 +167,20 @@
 // language
 const content = {
   en: {
+    whyTitle: "Why guests love this apartment",
+  },
+  ru: {
+    whyTitle: "Почему гостям нравится эта квартира",
+  },
+
+  en: {
     title: "Apartment for rent in Nice",
     subtitle: "30 m² • 5 minutes to the beach",
     aboutTitle: "About the apartment",
     aboutText: "Cozy and bright apartment, only 5 minutes walk to the sea. Perfect for a relaxed vacation stay.",
     bedroom: "Bedroom",
     ac: "Air conditioning",
-    quiet: "Windows facing a quiet courtyard",
+    quiet: "<span class="text-sm md:text-base tracking-wide">Quiet Courtyard View</span>",
     ctaTitle: "Contact us to book",
     galleryTitle: "Apartment",
     videoTitle: "A short glimpse",
@@ -164,10 +190,10 @@ const content = {
     title: "Квартира в аренду в Ницце",
     subtitle: "30 м² • 5 минут до моря",
     aboutTitle: "О квартире",
-    aboutText: "Уютная и светлая квартира, всего 5 минут пешком до моря.",
+    aboutText: "Уютная и светлая квартира в центре города, всего 5 минут пешком до моря. Рядом супермаркеты, кафе, рестораны и магазины. В пешей доступности трамвайная остановка и удобное сообщение с вокзалом (около 10 минут). Идеально для комфортного отдыха в Ницце.",
     bedroom: "Спальня",
     ac: "Кондиционер",
-    quiet: "Окна в тихий двор",
+    quiet: "<span class="text-sm md:text-base tracking-wide">Вид во тихий двор</span>",
     ctaTitle: "Свяжитесь с нами для бронирования",
     galleryTitle: "Квартира",
     videoTitle: "Небольшое видео",
