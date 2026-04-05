@@ -4,39 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Apartment</title>
-  <script src="https://cdn.tailwindcss.com">// smooth parallax (works on mobile too)
-window.addEventListener('scroll', () => {
-  const hero = document.querySelector('.hero-bg');
-  const offset = window.scrollY;
 
-  const isMobile = window.innerWidth <= 768;
-  const speed = isMobile ? 0.15 : 0.3;
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  hero.style.transform = `translateY(${offset * speed}px) scale(1.05)`;
-});
-  const offset = window.scrollY;
-
-  // parallax strength adaptive
-  const isMobile = window.innerWidth <= 768;
-  const speed = isMobile ? 0.15 : 0.3;
-
-  hero.style.transform = `translateY(${offset * speed}px) scale(1.05)`;
-});
-  const offset = window.scrollY;
-  hero.style.transform = `translateY(${offset * 0.3}px) scale(1.05)`;
-});
-
-</script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
   <style>
     body { font-family: 'Inter', sans-serif; }
     h1,h2 { font-family: 'Playfair Display', serif; }
 
-    /* fade in */
     .fade-in { opacity: 0; transform: translateY(30px); transition: all 1.2s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-    /* HERO subtle zoom */
     .hero-bg {
       background-size: cover;
       background-position: center 65%;
@@ -44,23 +23,15 @@ window.addEventListener('scroll', () => {
     }
 
     @media (max-width: 768px) {
-      .hero-bg {
-        background-position: center 75%;
-      }
-    }
-    @keyframes zoomHero {
-      from { transform: scale(1); }
-      to { transform: scale(1.08); }
+      .hero-bg { background-position: center 75%; }
     }
 
-    /* button glow */
     .glow-btn { transition: all 0.3s ease; }
     .glow-btn:hover {
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       transform: translateY(-2px);
     }
 
-    /* gallery hover */
     .img-wrap { overflow: hidden; border-radius: 16px; }
     .img-wrap img { transition: transform 0.6s ease; }
     .img-wrap:hover img { transform: scale(1.07); }
@@ -77,11 +48,26 @@ window.addEventListener('scroll', () => {
       background: radial-gradient(circle, rgba(59,130,246,0.25) 0%, rgba(59,130,246,0.08) 40%, transparent 70%);
       transform: translate(-50%, -50%);
       z-index: 0;
-      mix-blend-mode: multiply;
       transition: transform 0.08s linear;
+    }
+
+    /* address animation */
+    .address-anim {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: addressFade 1.2s ease forwards;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes addressFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
+
 <body class="bg-white text-gray-900">
 
 <div class="cursor-glow" id="cursorGlow"></div>
@@ -94,8 +80,9 @@ window.addEventListener('scroll', () => {
 
 <!-- HERO -->
 <section class="relative h-[85vh] flex items-center justify-center text-center overflow-hidden">
-  <div class="absolute inset-0 bg-cover hero-bg" style="background-image:url('image.png'); background-position:center 65%;"></div>
+  <div class="absolute inset-0 bg-cover hero-bg" style="background-image:url('image.png');"></div>
   <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60"></div>
+
   <div class="relative z-10 px-4 text-white fade-in">
     <h1 id="title" class="text-4xl md:text-6xl mb-4">Apartment for rent in Nice</h1>
     <p id="subtitle" class="text-lg md:text-xl opacity-90">30 m² • 5 minutes to the beach</p>
@@ -103,8 +90,8 @@ window.addEventListener('scroll', () => {
 </section>
 
 <!-- ADDRESS -->
-<section class="py-8 text-center text-gray-500 fade-in">
-  <p id="address">Rue Alexis Mossa, Nice</p>
+<section class="py-8 text-center text-gray-500">
+  <p id="address" class="address-anim">Rue Alexis Mossa, Nice</p>
 </section>
 
 <!-- ABOUT -->
@@ -129,14 +116,14 @@ window.addEventListener('scroll', () => {
 <section class="py-12 px-6 max-w-5xl mx-auto fade-in">
   <h2 id="galleryTitle" class="text-3xl text-center mb-8">Apartment</h2>
   <div class="grid md:grid-cols-2 gap-5">
-    <div class="img-wrap"><img src="photo1.jpg" class="shadow"></div>
-    <div class="img-wrap"><img src="photo2.jpg" class="shadow"></div>
-    <div class="img-wrap"><img src="photo3.jpg" class="shadow"></div>
-    <div class="img-wrap"><img src="photo4.jpg" class="shadow"></div>
+    <div class="img-wrap"><img src="photo1.jpg"></div>
+    <div class="img-wrap"><img src="photo2.jpg"></div>
+    <div class="img-wrap"><img src="photo3.jpg"></div>
+    <div class="img-wrap"><img src="photo4.jpg"></div>
   </div>
 </section>
 
-<!-- VIDEO SMALL -->
+<!-- VIDEO -->
 <section class="py-12 px-6 max-w-xl mx-auto text-center fade-in">
   <h2 id="videoTitle" class="text-2xl mb-4">A short glimpse</h2>
   <div class="aspect-video">
@@ -150,7 +137,9 @@ window.addEventListener('scroll', () => {
 <section class="py-16 text-center bg-gradient-to-r from-blue-600 to-blue-500 text-white fade-in">
   <h2 id="ctaTitle" class="text-3xl mb-6">Contact us to book</h2>
   <a href="https://wa.me/33753065745" target="_blank">
-    <button id="ctaBtn" class="bg-white text-blue-700 px-8 py-3 rounded-full glow-btn">Contact on WhatsApp</button>
+    <button class="bg-white text-blue-700 px-8 py-3 rounded-full glow-btn">
+      Contact on WhatsApp
+    </button>
   </a>
 </section>
 
@@ -165,7 +154,6 @@ const content = {
     ac: "Air conditioning",
     quiet: "Quiet courtyard",
     ctaTitle: "Contact us to book",
-    ctaBtn: "Contact",
     galleryTitle: "Apartment",
     videoTitle: "A short glimpse",
     address: "Rue Alexis Mossa, Nice"
@@ -174,12 +162,11 @@ const content = {
     title: "Квартира в аренду в Ницце",
     subtitle: "30 м² • 5 минут до моря",
     aboutTitle: "О квартире",
-    aboutText: "Уютная и светлая квартира, всего 5 минут пешком до моря. Идеально для отдыха.",
+    aboutText: "Уютная и светлая квартира, всего 5 минут пешком до моря.",
     bedroom: "Спальня",
     ac: "Кондиционер",
     quiet: "Тихий двор",
     ctaTitle: "Свяжитесь с нами для бронирования",
-    ctaBtn: "Связаться",
     galleryTitle: "Квартира",
     videoTitle: "Небольшое видео",
     address: "Rue Alexis Mossa, Ницца"
@@ -194,21 +181,29 @@ function setLang(lang) {
   }
 }
 
-// fade in on scroll
+// fade
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+    if (entry.isIntersecting) entry.target.classList.add('visible');
   });
 });
-
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// cursor glow follow
+// cursor glow
 const glow = document.getElementById('cursorGlow');
 document.addEventListener('mousemove', (e) => {
   glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+});
+
+// PARALLAX (fixed)
+window.addEventListener('scroll', () => {
+  const hero = document.querySelector('.hero-bg');
+  if (!hero) return;
+
+  const offset = window.scrollY;
+  const speed = window.innerWidth <= 768 ? 0.15 : 0.3;
+
+  hero.style.transform = `translateY(${offset * speed}px) scale(1.05)`;
 });
 </script>
 
