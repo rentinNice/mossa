@@ -9,6 +9,13 @@ window.addEventListener('scroll', () => {
   const hero = document.querySelector('.hero-bg');
   const offset = window.scrollY;
 
+  const isMobile = window.innerWidth <= 768;
+  const speed = isMobile ? 0.15 : 0.3;
+
+  hero.style.transform = `translateY(${offset * speed}px) scale(1.05)`;
+});
+  const offset = window.scrollY;
+
   // parallax strength adaptive
   const isMobile = window.innerWidth <= 768;
   const speed = isMobile ? 0.15 : 0.3;
@@ -33,6 +40,7 @@ window.addEventListener('scroll', () => {
     .hero-bg {
       background-size: cover;
       background-position: center 65%;
+      will-change: transform;
     }
 
     @media (max-width: 768px) {
