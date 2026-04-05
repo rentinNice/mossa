@@ -51,7 +51,7 @@
       transition: transform 0.08s linear;
     }
 
-    /* address animation */
+    /* PREMIUM ADDRESS */
     .address-anim {
       opacity: 0;
       transform: translateY(20px);
@@ -65,9 +65,9 @@
         transform: translateY(0);
       }
     }
+
   </style>
 </head>
-
 <body class="bg-white text-gray-900">
 
 <div class="cursor-glow" id="cursorGlow"></div>
@@ -82,7 +82,6 @@
 <section class="relative h-[85vh] flex items-center justify-center text-center overflow-hidden">
   <div class="absolute inset-0 bg-cover hero-bg" style="background-image:url('image.png');"></div>
   <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60"></div>
-
   <div class="relative z-10 px-4 text-white fade-in">
     <h1 id="title" class="text-4xl md:text-6xl mb-4">Apartment for rent in Nice</h1>
     <p id="subtitle" class="text-lg md:text-xl opacity-90">30 m² • 5 minutes to the beach</p>
@@ -110,7 +109,7 @@
     <div><p class="text-2xl">30</p><p>m²</p></div>
     <div><p class="text-2xl">1</p><p id="bedroom">Bedroom</p></div>
     <div><p class="text-2xl">AC</p><p id="ac">Air conditioning</p></div>
-    <div><p class="text-2xl text-gray-600" id="quiet">Quiet courtyard</p></div>
+    <div><p class="text-2xl text-gray-600" id="quiet">Windows facing a quiet courtyard</p></div>
   </div>
 </section>
 
@@ -146,6 +145,7 @@
 </section>
 
 <script>
+// language
 const content = {
   en: {
     title: "Apartment for rent in Nice",
@@ -154,11 +154,11 @@ const content = {
     aboutText: "Cozy and bright apartment, only 5 minutes walk to the sea. Perfect for a relaxed vacation stay.",
     bedroom: "Bedroom",
     ac: "Air conditioning",
-    quiet: "Quiet courtyard",
+    quiet: "Windows facing a quiet courtyard",
     ctaTitle: "Contact us to book",
     galleryTitle: "Apartment",
     videoTitle: "A short glimpse",
-    address: "Rue Alexis Mossa, Nice"
+    address: "📍 Rue Alexis Mossa, Nice"
   },
   ru: {
     title: "Квартира в аренду в Ницце",
@@ -167,11 +167,11 @@ const content = {
     aboutText: "Уютная и светлая квартира, всего 5 минут пешком до моря.",
     bedroom: "Спальня",
     ac: "Кондиционер",
-    quiet: "Тихий двор",
+    quiet: "Окна во тихий двор",
     ctaTitle: "Свяжитесь с нами для бронирования",
     galleryTitle: "Квартира",
     videoTitle: "Небольшое видео",
-    address: "Rue Alexis Mossa, Ницца"
+    address: "📍 Rue Alexis Mossa, Ницца"
   }
 };
 
@@ -197,7 +197,7 @@ document.addEventListener('mousemove', (e) => {
   glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
 });
 
-// PARALLAX (fixed)
+// PARALLAX
 window.addEventListener('scroll', () => {
   const hero = document.querySelector('.hero-bg');
   if (!hero) return;
