@@ -1,104 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apartment</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apartment</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
 
-<style>
-body { font-family: sans-serif; }
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-/* HERO */
-.hero-bg {
-  background-size: cover;
-  background-position: center;
-}
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    h1,h2 { font-family: 'Playfair Display', serif; }
 
-/* hover */
-.img-wrap { overflow: hidden; border-radius: 16px; }
-.img-wrap img { transition: transform 0.5s ease; }
-.img-wrap:hover img { transform: scale(1.05); }
+    .fade-in { opacity: 0; transform: translateY(30px); transition: all 1.2s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-</style>
+    .hero-bg {
+      background-size: cover;
+      background-position: center 65%;
+      will-change: transform;
+    }
+
+    @media (max-width: 768px) {
+      .hero-bg { background-position: center 75%; }
+    }
+
+    .glow-btn { transition: all 0.3s ease; }
+    .glow-btn:hover {
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      transform: translateY(-2px);
+    }
+
+    .img-wrap { overflow: hidden; border-radius: 16px; }
+    .img-wrap img { transition: transform 0.6s ease; }
+    .img-wrap:hover img { transform: scale(1.07); }
+
+    .cursor-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+      pointer-events: none;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.25) 0%, rgba(59,130,246,0.08) 40%, transparent 70%);
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      transition: transform 0.08s linear;
+    }
+
+    .address-anim {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: addressFade 1.2s ease forwards;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes addressFade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
 </head>
 
 <body class="bg-white text-gray-900">
 
-<!-- HERO -->
-<section class="relative h-[80vh] flex items-center justify-center text-center">
-  <div class="absolute inset-0 hero-bg" style="background-image:url('image.png');"></div>
-  <div class="absolute inset-0 bg-black/40"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
 
-  <div class="relative text-white">
-    <h1 class="text-4xl md:text-6xl mb-4">Apartment for rent in Nice</h1>
-    <p class="text-lg">30 m² • 5 minutes to the beach</p>
+<!-- NAV -->
+<div class="fixed top-0 w-full flex justify-end items-center px-6 py-4 z-50 bg-white/60 backdrop-blur">
+  <button onclick="setLang('en')" class="mx-2">EN</button>
+  <button onclick="setLang('ru')" class="mx-2">RU</button>
+</div>
+
+<!-- HERO -->
+<section class="relative h-[85vh] flex items-center justify-center text-center overflow-hidden">
+  <div class="absolute inset-0 bg-cover hero-bg" style="background-image:url('image.png');"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60"></div>
+  <div class="relative z-10 px-4 text-white fade-in">
+    <h1 id="title" class="text-4xl md:text-6xl mb-4">Apartment for rent in Nice</h1>
+    <p id="subtitle" class="text-lg md:text-xl opacity-90">30 m² • 5 minutes to the beach</p>
   </div>
 </section>
 
 <!-- ADDRESS -->
 <section class="py-10 text-center">
-  <p class="text-xl font-medium">📍 Rue Alexis Mossa, Nice</p>
+  <p id="address" class="address-anim text-lg md:text-xl text-gray-800 tracking-wide font-medium hover:text-blue-600 transition duration-300">
+    📍 Rue Alexis Mossa, Nice
+  </p>
 </section>
 
 <!-- ABOUT -->
-<section class="py-10 max-w-3xl mx-auto text-center">
-  <p>
-    Cozy apartment in the city center, 5 minutes to the sea.
-    Close to shops, restaurants and transport.
+<section class="py-12 px-6 max-w-3xl mx-auto text-center fade-in">
+  <h2 id="aboutTitle" class="text-3xl mb-4">About the apartment</h2>
+  <p id="aboutText" class="text-gray-600 leading-relaxed">
+    Cozy and bright apartment in the city center, just 5 minutes walk to the sea. Surrounded by supermarkets, cafes, restaurants, and shops. Only a short walk to the tram stop with direct access to the train station (around 10 minutes). Perfect for a comfortable and relaxing stay in Nice.
   </p>
 </section>
 
 <!-- FEATURES -->
-<section class="py-10 text-center">
-  <p>30 m² • 1 bedroom • AC • Quiet Courtyard View</p>
+<section class="py-12 fade-in">
+  <div class="max-w-5xl mx-auto grid md:grid-cols-4 gap-8 text-center">
+    <div><p class="text-2xl">30</p><p>m²</p></div>
+    <div><p class="text-2xl">1</p><p id="bedroom">Bedroom</p></div>
+    <div><p class="text-2xl">AC</p><p id="ac">Air conditioning</p></div>
+    <div><p class="text-2xl text-gray-600" id="quiet"><span class="text-sm md:text-base tracking-wide">Quiet Courtyard View</span></p></div>
+  </div>
 </section>
 
 <!-- GALLERY -->
-<section class="py-10 max-w-5xl mx-auto grid md:grid-cols-2 gap-4">
-  <div class="img-wrap"><img src="photo1.jpg"></div>
-  <div class="img-wrap"><img src="photo2.jpg"></div>
-  <div class="img-wrap"><img src="photo3.jpg"></div>
-  <div class="img-wrap"><img src="photo4.jpg"></div>
+<section class="py-12 px-6 max-w-5xl mx-auto fade-in">
+  <h2 id="galleryTitle" class="text-3xl text-center mb-8">Apartment</h2>
+  <div class="grid md:grid-cols-2 gap-5">
+    <div class="img-wrap"><img src="photo1.jpg"></div>
+    <div class="img-wrap"><img src="photo2.jpg"></div>
+    <div class="img-wrap"><img src="photo3.jpg"></div>
+    <div class="img-wrap"><img src="photo4.jpg"></div>
+  </div>
 </section>
 
 <!-- WHY -->
-<section class="py-12 max-w-5xl mx-auto text-center">
-  <h2 class="text-3xl mb-6">Why guests love this apartment</h2>
-
-  <div class="grid md:grid-cols-3 gap-6 text-left">
+<section class="py-16 px-6 max-w-5xl mx-auto text-center fade-in">
+  <h2 id="whyTitle" class="text-3xl mb-10">Why guests love this apartment</h2>
+  <div class="grid md:grid-cols-3 gap-8 text-left">
     <div>
-      <h3 class="font-semibold">Perfect location</h3>
-      <p>Center of Nice, everything nearby</p>
+      <h3 class="font-semibold text-lg mb-2">Perfect location</h3>
+      <p class="text-gray-600">Right in the center of Nice, close to beach, shops, restaurants and transport.</p>
     </div>
     <div>
-      <h3 class="font-semibold">Quiet</h3>
-      <p>Courtyard view, very calm</p>
+      <h3 class="font-semibold text-lg mb-2">Quiet and relaxing</h3>
+      <p class="text-gray-600">Courtyard-facing windows provide peace and silence.</p>
     </div>
     <div>
-      <h3 class="font-semibold">Comfort</h3>
-      <p>Clean and cozy space</p>
+      <h3 class="font-semibold text-lg mb-2">Comfortable stay</h3>
+      <p class="text-gray-600">Bright, clean and fully equipped apartment for a perfect vacation.</p>
     </div>
   </div>
 </section>
 
 <!-- VIDEO -->
-<section class="py-10 max-w-xl mx-auto text-center">
-  <video controls class="w-full rounded-xl">
-    <source src="video.mp4">
-  </video>
+<section class="py-12 px-6 max-w-xl mx-auto text-center fade-in">
+  <h2 id="videoTitle" class="text-2xl mb-4">A short glimpse</h2>
+  <div class="aspect-video">
+    <video controls class="w-full h-full rounded-xl shadow">
+      <source src="video.mp4" type="video/mp4">
+    </video>
+  </div>
 </section>
 
 <!-- CTA -->
-<section class="py-12 text-center bg-blue-600 text-white">
-  <h2 class="text-2xl mb-4">Contact us to book</h2>
-  <a href="https://wa.me/33753065745">
-    <button class="bg-white text-blue-600 px-6 py-2 rounded-full">
-      WhatsApp
+<section class="py-16 text-center bg-gradient-to-r from-blue-600 to-blue-500 text-white fade-in">
+  <h2 id="ctaTitle" class="text-3xl mb-6">Contact us to book</h2>
+  <a href="https://wa.me/33753065745" target="_blank">
+    <button class="bg-white text-blue-700 px-8 py-3 rounded-full glow-btn">
+      Contact on WhatsApp
     </button>
   </a>
 </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+function setLang(lang) {
+  const content = {
+    en: {
+      title: "Apartment for rent in Nice",
+      subtitle: "30 m² • 5 minutes to the beach",
+      aboutTitle: "About the apartment",
+      aboutText: "Cozy and bright apartment in the city center, just 5 minutes walk to the sea.",
+      bedroom: "Bedroom",
+      ac: "Air conditioning",
+      quiet: "Quiet Courtyard View",
+      ctaTitle: "Contact us to book",
+      galleryTitle: "Apartment",
+      videoTitle: "A short glimpse",
+      address: "📍 Rue Alexis Mossa, Nice",
+      whyTitle: "Why guests love this apartment"
+    },
+    ru: {
+      title: "Квартира в аренду в Ницце",
+      subtitle: "30 м² • 5 минут до моря",
+      aboutTitle: "О квартире",
+      aboutText: "Уютная квартира в центре города, 5 минут до моря.",
+      bedroom: "Спальня",
+      ac: "Кондиционер",
+      quiet: "Вид во тихий двор",
+      ctaTitle: "Свяжитесь с нами",
+      galleryTitle: "Квартира",
+      videoTitle: "Небольшое видео",
+      address: "📍 Rue Alexis Mossa, Ницца",
+      whyTitle: "Почему нравится квартира"
+    }
+  };
+
+  for (let key in content[lang]) {
+    if(document.getElementById(key)){
+      document.getElementById(key).innerText = content[lang][key];
+    }
+  }
+}
+
+window.setLang = setLang;
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+});
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', (e) => {
+  glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+});
+
+window.addEventListener('scroll', () => {
+  const hero = document.querySelector('.hero-bg');
+  if (!hero) return;
+  const offset = window.scrollY;
+  const speed = window.innerWidth <= 768 ? 0.15 : 0.3;
+  hero.style.transform = `translateY(${offset * speed}px) scale(1.05)`;
+});
+
+});
+</script>
 
 </body>
 </html>
